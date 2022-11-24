@@ -3,7 +3,7 @@
 // cartmodel,productmodel has initial schema
 //completed CART functionality
 
-                     ----------------------------------------------------------------
+                     ------------------------------------------------------------------
 GET https://netmeds.onrender.com/product           ----> FOR ALL PRODUCTS
 GET https://netmeds.onrender.com/cart/userid       ----> FOR PERSONAL CART
 POST https://netmeds.onrender.com/cart             ----> FOR ADD TO CART              required : userid in body

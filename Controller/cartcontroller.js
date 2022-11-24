@@ -61,10 +61,12 @@ export const addCart=async(req,res) =>{
 }
 
 export const updateCart=async(req,res) =>{
+   try{
     const {id}=req.params;
-    let body=req.body;
+    console.log(id)
+    let body=req.body.quantity;
     if(id){
-        let data=await cartModel.findByIdAndUpdate({ _id:id,actual_price:70 });
+        let data=await cartModel.findByIdAndUpdate( id,{quantity:body} );
         res.send({
             status:"true",
             data:data
@@ -75,16 +77,24 @@ export const updateCart=async(req,res) =>{
 
         })
     }
+   }catch(err){
+    res.status(500).send({
+        status:"false",
+        data:err.message
+    })
+   }
 }
 
 export const deleteCart=async(req,res) =>{
     try{
-        const {_id}=req.params;
+        const {id}=req.params;
+        console.log(id)
         if(id){
-            let data=await cartModel.findByIdAndDelete({_id:id});
+            let data=await cartModel.findByIdAndRemove(id);
             res.send({
                 status:"true",
-                data:data
+                data:data,
+                message:"deleted successfully"
             })
         }else{
             res.status(500).send({

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 const userDataschema = new mongoose.Schema(
   {
     email: { type: String, required: true },
@@ -22,4 +22,4 @@ userDataschema.methods.checkPassword = function (password) {
 
 const netmedsuser = mongoose.model('user', userDataschema)
 
-module.exports = netmedsuser
+export default netmedsuser

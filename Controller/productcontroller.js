@@ -2,24 +2,28 @@ import productModel from "../Models/productmodel.js";
 
 
 export const Products=async(req,res) =>{
-    let data= await productModel.find();
-    console.log(data)
-    res.send({
-        status:"true",
-        data:data
-    })
-}
+ try {
+    let {page=1,sortBy="_id",order="asc",pageSize=20,startPoint=0, endPoint=Infinity}=req.query
+    let filter = {
+        $and: [
+            {
+            actual_price: {$gt: startPoint }
+        },
+            {
+            actual_price: {$lt: endPoint }
+        }
+    ]
+    }
 
-export const ProductsAsc = async(req, res) =>{
-    let data= await productModel.aggregate(
-        [
-          { $sort : { actual_price : -1 } }
-        ]
-     )
+    let data = await productModel.find(filter).sort({[sortBy]:order==="asc"? 1:-1}).limit(pageSize).skip(pageSize*(page-1))
+
     console.log(data)
-    res.send({
+   return res.send({
         status:"true",
         data:data
     })
-} 
+ } catch (error) {
+    return res.status(400).send({status : "Error Found", data: "Not Found"});
+ }
+}
 

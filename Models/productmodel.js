@@ -6,4 +6,3 @@ const ProductSchema = new mongoose.Schema({
 
 const productModel=mongoose.model('products',ProductSchema);
 export default productModel
-

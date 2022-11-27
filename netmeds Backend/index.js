@@ -4,6 +4,7 @@ import cors from 'cors'
 import { Products } from './Controller/productcontroller.js'
 import { Signup, Login } from './Controller/userRegistrationController.js'
 import {addCart,cartProduct, deleteCart, updateCart} from './Controller/cartcontroller.js'
+import { searchProduct } from './Controller/search.controller.js'
 
 
 const app = express()
@@ -19,11 +20,8 @@ app.post('/cart',addCart);
 app.patch('/cart/:id',updateCart)
 app.delete('/cart/:id',deleteCart)
 app.get('/product',Products);
-
-
-
+app.post("/product",searchProduct);
 app.get('/cart', cartProduct)
-app.get('/product', Products)
 
 app.listen(8080, () => {
   try {

@@ -1,5 +1,6 @@
 import netmedsuser from '../Models/usermodel.js'
 import jwt from 'jsonwebtoken'
+import jwt_decode from "jwt-decode";
 
 const jsontoken = (user) => {
   return jwt.sign({ user }, 'confidential')
@@ -39,4 +40,17 @@ export const Login = async (req, res) => {
   } catch (error) {
     return res.status(500).send(error.message)
   }
+}
+
+export const Decode = (req, res) =>{
+   try{
+    if(req.body.token){
+      const user = jwt_decode(req.body.token)
+      return res.status(200).send(user)
+    }else{
+      res.status(400).send("error")
+    }
+   }catch(err){
+    res.status(500).send(err)
+   }
 }

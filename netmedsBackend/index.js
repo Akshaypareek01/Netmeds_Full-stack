@@ -4,6 +4,7 @@ import cors from 'cors'
 import { Products } from './Controller/productcontroller.js'
 import { Signup, Login } from './Controller/userRegistrationController.js'
 import {addCart,cartProduct, deleteCart, updateCart} from './Controller/cartcontroller.js'
+import { searchProduct } from './Controller/search.controller.js'
 
 
 const app = express()
@@ -21,12 +22,13 @@ app.delete('/cart/:id',deleteCart)
 app.get('/product',Products);
 
 
-
-app.get('/cart', cartProduct)
-app.get('/product', Products)
+app.post("/product",searchProduct);
+app.get('/cart', cartProduct);
+app.get('/product', Products);
 
 app.listen(8080, () => {
   try {
+    console.log("Listening on Port 8080")
     connection()
   } catch (e) {
     console.log(e)

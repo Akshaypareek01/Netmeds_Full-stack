@@ -25,6 +25,7 @@ app.get('/cart', cartProduct)
 
 app.listen(8080, () => {
   try {
+    console.log("Listening on Port 8080")
     connection()
   } catch (e) {
     console.log(e)

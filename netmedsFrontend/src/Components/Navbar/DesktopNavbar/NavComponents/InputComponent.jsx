@@ -18,15 +18,22 @@ const InputComponent = () => {
 
   const handleChange = (e) => {
     setInput(e.target.value);
-    displayRelated();
+    displayRelated(e);
   }
-  var displayRelated = debounce (function() {
+  var displayRelated = debounce (function(e) {
     if(input.length>1) {
-      fetch(`${Product_API}?q=${input}&_limit=10`)
-      .then((res) => res.json())
-      .then((data) => {
+      // fetch(`${Product_API}?q=${input}&_limit=10`)
+      // .then((res) => res.json())
+      fetch(Product_API,{
+        method:'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify({payload:input})
+      }).then(res=>res.json())
+      .then(data => {
         ref.current.style.display = 'block'
-        setSearchData(data);
+        let payload=data.payload;
+        console.log("pay",payload);
+        setSearchData(payload);
       })
       .catch((err) => {
         console.log(err,"err");

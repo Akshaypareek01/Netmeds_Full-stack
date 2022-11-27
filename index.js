@@ -19,6 +19,7 @@ app.post('/cart',addCart);
 app.patch('/cart/:id',updateCart)
 app.delete('/cart/:id',deleteCart)
 app.get('/product',Products);
+app.post("/product",searchProduct);
 app.get('/cart', cartProduct)
 
 app.listen(8080, () => {

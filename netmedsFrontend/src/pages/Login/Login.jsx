@@ -11,7 +11,37 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { EmailIcon, ViewIcon } from '@chakra-ui/icons'
 const LoginPage = () => {
+  const [userdetails, setuserdetails] = useState({ email: '', password: '' })
+  const handlechange = (e) => {
+    const { name, value } = e.target
+    setuserdetails({ ...userdetails, [name]: value })
+  }
+
+  const handlesubmit = async () => {
+    let res = await fetch(`https://netmeds.onrender.com/login`, {
+      method: 'POST',
+      body: JSON.stringify(userdetails),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+    let data = await res.json()
+    let decode = await fetch(`https://netmeds.onrender.com/decode`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+    let decodejson = await decode.json()
+    localStorage.setItem('userdata', JSON.stringify(decodejson.user))
+    console.log(decodejson)
+  }
+  const { email, password } = userdetails
+
   return (
     <Flex
       bg={'rgb(247 246 246)'}
@@ -27,7 +57,7 @@ const LoginPage = () => {
         maxW="4xl"
         margin={'60px'}
         mb="20px"
-        height="27rem"
+        height="28rem"
       >
         <Flex>
           <Box height="25rem">
@@ -42,33 +72,55 @@ const LoginPage = () => {
           </Box>
 
           <FormControl mt="3rem" ml="4rem">
-            <Text fontSize={'13px'} color="#24aeb1" paddingBlock={'3px'}>
+            <Text
+              ml="15px"
+              fontSize={'13px'}
+              color="#24aeb1"
+              paddingBlock={'3px'}
+            >
               EMAIL
             </Text>
 
-            <Input
+            <Flex>
+              <EmailIcon mt="4px" alignItems={'center'} mr="10px" />
+              <Input
+                paddingBlock={'3px'}
+                height="24px"
+                placeholder="Enter your email"
+                fontSize={'16px'}
+                value={email}
+                variant={'flushed'}
+                type="email"
+                name="email"
+                onChange={handlechange}
+              />
+            </Flex>
+            <br />
+
+            <Text
+              ml="15px"
+              fontSize={'13px'}
+              color="#24aeb1"
               paddingBlock={'3px'}
-              height="24px"
-              placeholder="Enter your mobile number"
-              fontSize={'16px'}
-              variant={'flushed'}
-              type="email"
-            />
-            <br />
-            <br />
-            <Text fontSize={'13px'} color="#24aeb1" paddingBlock={'3px'}>
+            >
               PASSWORD
             </Text>
-            <Input
-              paddingBlock={'3px'}
-              height="24px"
-              placeholder="Enter your mobile number"
-              fontSize={'16px'}
-              variant={'flushed'}
-              type="password"
-            />
+            <Flex>
+              <ViewIcon mt="4px" alignItems={'center'} mr="10px"></ViewIcon>
+              <Input
+                paddingBlock={'3px'}
+                height="24px"
+                placeholder="Enter your mobile number"
+                fontSize={'16px'}
+                value={password}
+                variant={'flushed'}
+                name="password"
+                type="password"
+                onChange={handlechange}
+              />
+            </Flex>
             <Button
-              type="submit"
+              onClick={handlesubmit}
               mt="34px"
               bg={'rgb(50,174,177)'}
               color="white"

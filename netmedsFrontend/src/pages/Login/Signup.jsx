@@ -11,7 +11,36 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { EmailIcon, ViewIcon, InfoIcon } from '@chakra-ui/icons'
 const Signup = () => {
+  const [userdetails, setuserdetails] = useState({
+    name: '',
+    email: '',
+    password: '',
+  })
+
+  const handlechange = (e) => {
+    const { name, value } = e.target
+    setuserdetails({ ...userdetails, [name]: value })
+    console.log(userdetails)
+  }
+  const handlesubmit = () => {
+    fetch(`https://netmeds.onrender.com/signup`, {
+      method: 'POST',
+      body: JSON.stringify(userdetails),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        res.json()
+        console.log(res)
+      })
+      .catch((err) => console.log(err))
+  }
+
+  const { name, email, password } = userdetails
   return (
     <Flex
       bg={'rgb(247 246 246)'}
@@ -42,47 +71,78 @@ const Signup = () => {
           </Box>
 
           <FormControl mt="3rem" ml="4rem">
-            <Text fontSize={'13px'} color="#24aeb1" paddingBlock={'3px'}>
+            <Text
+              ml="15px"
+              fontSize={'13px'}
+              color="#24aeb1"
+              paddingBlock={'3px'}
+            >
               NAME
             </Text>
+            <Flex>
+              <InfoIcon mt="4px" alignItems={'center'} mr="10px" />
+              <Input
+                paddingBlock={'3px'}
+                height="24px"
+                placeholder="Enter your name"
+                fontSize={'16px'}
+                variant={'flushed'}
+                value={name}
+                type="text"
+                name="name"
+                onChange={handlechange}
+              />
+            </Flex>
+            <br />
 
-            <Input
+            <Text
+              ml="15px"
+              fontSize={'13px'}
+              color="#24aeb1"
               paddingBlock={'3px'}
-              height="24px"
-              placeholder="Enter your name"
-              fontSize={'16px'}
-              variant={'flushed'}
-              type="text"
-            />
-            <br />
-            <br />
-            <Text fontSize={'13px'} color="#24aeb1" paddingBlock={'3px'}>
+            >
               EMAIL
             </Text>
+            <Flex>
+              <EmailIcon mt="4px" alignItems={'center'} mr="10px" />
+              <Input
+                paddingBlock={'3px'}
+                height="24px"
+                placeholder="Enter your mobile number"
+                fontSize={'16px'}
+                variant={'flushed'}
+                type="email"
+                value={email}
+                onChange={handlechange}
+                name="email"
+              />
+            </Flex>
+            <br />
 
-            <Input
+            <Text
+              ml="15px"
+              fontSize={'13px'}
+              color="#24aeb1"
               paddingBlock={'3px'}
-              height="24px"
-              placeholder="Enter your mobile number"
-              fontSize={'16px'}
-              variant={'flushed'}
-              type="email"
-            />
-            <br />
-            <br />
-            <Text fontSize={'13px'} color="#24aeb1" paddingBlock={'3px'}>
+            >
               PASSWORD
             </Text>
-            <Input
-              paddingBlock={'3px'}
-              height="24px"
-              placeholder="Enter your mobile number"
-              fontSize={'16px'}
-              variant={'flushed'}
-              type="password"
-            />
+            <Flex>
+              <ViewIcon mt="4px" alignItems={'center'} mr="10px" />
+              <Input
+                paddingBlock={'3px'}
+                height="24px"
+                placeholder="Enter your mobile number"
+                fontSize={'16px'}
+                variant={'flushed'}
+                type="password"
+                name="password"
+                value={password}
+                onChange={handlechange}
+              />
+            </Flex>
             <Button
-              type="submit"
+              onClick={handlesubmit}
               mt="34px"
               bg={'rgb(50,174,177)'}
               color="white"

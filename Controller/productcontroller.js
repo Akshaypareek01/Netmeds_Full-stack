@@ -3,7 +3,20 @@ import productModel from "../Models/productmodel.js";
 const categOption = [
     "Personal Care","Treatments","Mom & Baby","Covid Essentials"]
 
-const manufacturer=[]
+const manufOption=["Cipla Ltd(Otc)",
+ "Patanjali Ayurved Ltd",
+ "Piramal Healthcare Ltd",
+ "Inventz Lifesciences Pvt Ltd",
+ "Gsk",
+ "Chinar Forge Ltd.",
+ "V1 Enterprises",
+ "VLCC Personal Care Ltd",
+ "Colgate Palmolive India Ltd",
+ "NATURE's ESSENCE PVT LTD",
+ "The Himalaya Drug Company",
+ "Dabur India Ltd",
+ "Pep Technologies Pvt, Ltd"
+]
 
 export const Products=async(req,res) =>{
  try {
@@ -19,8 +32,8 @@ export const Products=async(req,res) =>{
             actual_price: {$lt: endPoint }
         }
     ],
-    category : {$in: (category=="all")?categOption:category.split(",")},
-
+    category : {$in: (category=="all")?categOption:category.split(",")}
+    // manufacturer : {$in: (manufacturer=="all")?manufOption:manufacturer.split(",")}
     
 
     }

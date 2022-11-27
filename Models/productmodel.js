@@ -11,7 +11,6 @@ const ProductSchema = new mongoose.Schema({
     country: {type:String},
     category: {type:String},
     sub_category:{type:String}
-
 })
 
 const productModel=mongoose.model('products',ProductSchema);

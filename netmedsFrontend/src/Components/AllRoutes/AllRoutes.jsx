@@ -1,19 +1,21 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import { Cart } from "../../pages/Cart/Cart";
-import { Landing } from "../../pages/landing";
-import Footer from "../Footer/Footer";
-import LoginPage from "../../pages/Login/LoginPage";
-import { OrderReview } from "../../pages/PaymentPage/orderReview";
-import { PymentDetails } from "../../pages/PaymentPage/paymentDetails";
-import ProductDetail from "../../pages/ProductDetailPage/ProductDetail";
-import Products from "../../pages/ProductPage/Products";
-import { useSelector } from "react-redux";
-import { PrivateRoute } from "../../context/PrivateRoute";
-import ErrorPage from "../../pages/ErrorPage";
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { Cart } from '../../pages/Cart/Cart'
+import { Landing } from '../../pages/landing'
+import Footer from '../Footer/Footer'
+
+import { OrderReview } from '../../pages/PaymentPage/orderReview'
+import { PymentDetails } from '../../pages/PaymentPage/paymentDetails'
+import ProductDetail from '../../pages/ProductDetailPage/ProductDetail'
+import Products from '../../pages/ProductPage/Products'
+import { useSelector } from 'react-redux'
+import { PrivateRoute } from '../../context/PrivateRoute'
+import ErrorPage from '../../pages/ErrorPage'
+import LoginPage from '../../pages/Login/Login'
+import Signup from '../../pages/Login/Signup'
 
 export const AllRoutes = () => {
-  const mobileView = useSelector((state) => state.mobileView);
+  const mobileView = useSelector((state) => state.mobileView)
   return (
     <Routes>
       <Route
@@ -41,6 +43,7 @@ export const AllRoutes = () => {
         }
       ></Route>
       <Route path="/Login" element={<LoginPage></LoginPage>}></Route>
+      <Route path="/Signup" element={<Signup></Signup>}></Route>
       <Route path="/cart" element={<Cart></Cart>}></Route>
       <Route
         path="/payment"
@@ -67,5 +70,5 @@ export const AllRoutes = () => {
         }
       ></Route>
     </Routes>
-  );
-};
+  )
+}

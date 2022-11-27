@@ -9,7 +9,7 @@ export const searchProduct=async(req,res) =>{
    // let search=await productModel.find({title:{$regex:new RegExp('^'+payload+'.*','i')}}).exec();
  let search=await productModel.find({title:{$regex:payload}})
    search=search.slice(0,10);
-   // console.log(search);
+  
    res.send({payload:search});
    
 }

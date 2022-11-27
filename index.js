@@ -9,14 +9,15 @@ const app = express()
 app.use(express.json())
 app.use(cors());
 
-app.get('/cart',cartProduct)
-app.get('/product',Products)
+app.get('/cart', cartProduct)
+app.get('/product', Products)
+
 // app.get('/prodasc',ProductsAsc)
 
-app.listen(8080,()=>{
-    try{
+app.listen(8080, () => {
+    try {
         connection();
-    }catch(e){
+    } catch (e) {
         console.log(e)
     }
 })

@@ -8,9 +8,12 @@ import { AppContext } from '../../context/AppContext';
 import { removeCartRedux, setCartProduct } from '../../Redux/action';
 import ErrorPage from '../ErrorPage';
 
+
+
 export const Cart = () => {
     // const mobileView = useSelector((state) => state.mobileView);
     // console.log(mobileView);
+    
     const [saveForLaterData, setSaveForLaterData] = useState([]);
     const [showHidden, setShowHidden] = useState('show')
     const promeRef = useRef(null);
@@ -30,27 +33,26 @@ export const Cart = () => {
             })
     }
     const removeCart = (url, id) => {
-        console.log(url, 'url');
+        console.log(id, 'url');
         setLoading(true);
         fetch(`${url}/${id}`, {
             method: 'DELETE',
         }).then(() => {
             setLoading(false)
-            if (url === Cart_API) {
-                dispatch(removeCartRedux(id));
-            }
+            // if (url === Cart_API) {
+            //     dispatch(removeCartRedux(id));
+            // }
             getData();
-            getSaveData();
         }).catch((err) => {
             setError(true)
         })
     }
     useEffect(() => {
         getData();
-        getSaveData();
     }, [])
 
     const handleQuantity = (e, id) => {
+        console.log(id)
         setLoading(true);
         const body = {
             quantity: e.target.value
@@ -70,7 +72,7 @@ export const Cart = () => {
     }
     const AddToCartFromSave = (el) => {
         setLoading(true);
-        removeCart(SaveForLater_API, el.id)
+        removeCart(SaveForLater_API, el._id)
         fetch(Cart_API, {
             method: 'POST',
             body: JSON.stringify(el),
@@ -162,7 +164,7 @@ export const Cart = () => {
                                             <Box>
                                                 {
                                                     saveForLaterData.map(el => (
-                                                        <Flex key={el.id} borderBottom='1px solid #dddde0' p='15px' gap='10px'>
+                                                        <Flex key={el._id} borderBottom='1px solid #dddde0' p='15px' gap='10px'>
                                                             <Box>
                                                                 <Image w='120px' h='100%' src={el.img1}></Image>
                                                             </Box>
@@ -172,7 +174,7 @@ export const Cart = () => {
                                                                     <Text fontSize={'12px'} color='#151B3999'>QTY: {el.quantity ? el.quantity : 1}</Text>
                                                                     <Text fontSize={'12px'} color='#151B3999'>Mfr: {el.manufacturer}</Text>
                                                                     <Flex mt='20px'>
-                                                                        <Button bg='#e7e8eb' mr='10px' borderRadius={'3px'} fontSize={'12px'} color='#151B3999' size='xs' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart(SaveForLater_API, el.id)}>REMOVE</Button>
+                                                                        <Button bg='#e7e8eb' mr='10px' borderRadius={'3px'} fontSize={'12px'} color='#151B3999' size='xs' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart(SaveForLater_API, el._id)}>REMOVE</Button>
                                                                         <Button bg='#24aeb1' color='#fff' borderRadius={'3px'} fontSize={'12px'} size='xs' _hover={'none'} letterSpacing={'1px'} onClick={() => AddToCartFromSave(el)}>ADD TO CART</Button>
                                                                     </Flex>
                                                                 </Box>
@@ -211,7 +213,7 @@ export const Cart = () => {
                                         <Box>
                                             {
                                                 cartData.map(el => (
-                                                    <Box key={el.id} borderBottom='1px solid #dddde0' p='15px 0'>
+                                                    <Box key={el._id} borderBottom='1px solid #dddde0' p='15px 0'>
                                                         <Box display={{ base: 'block', lg: 'flex' }}>
                                                             <Box><Image w={{ base: '120px', lg: '40px' }} h={{ base: '100px', lg: '40px' }} src={el.img1}></Image></Box>
                                                             <Box ml='20px'>
@@ -228,7 +230,7 @@ export const Cart = () => {
                                                             </Box>
                                                             <Box>
                                                                 <Text position={'absolute'} top='10px' right='90px' fontSize={'20px'}>QTY: </Text>
-                                                                <Select placeholder={el.quantity ? el.quantity : 1} onChange={(e) => handleQuantity(e, el.id)}>
+                                                                <Select placeholder={el.quantity ? el.quantity : 1} onChange={(e) => handleQuantity(e, el._id)}>
                                                                     {
                                                                         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(el => (
                                                                             <option key={el} value={el}>{el}</option>
@@ -242,7 +244,7 @@ export const Cart = () => {
                                                                 <Text fontSize={'12px'}>Delivery between <span style={{ fontSize: '13px' }}>{date.toString().substring(0, 8)}{date.toString().substring(8, 10)}-{date.toString().substring(0, 8)}{+date.toString().substring(8, 10) + 1}</span></Text>
                                                             </Box>
                                                             <Box w={{ base: '100%', lg: '70%' }} display={'flex'} justifyContent='space-between' gap='10px' mt={{ base: '10px', lg: '0' }}>
-                                                                <Button bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart(Cart_API, el.id)}>REMOVE</Button>
+                                                                <Button bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart(Cart_API, el._id)}>REMOVE</Button>
                                                                 <Button onClick={() => handleSaveForLater(el)} bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover='none' letterSpacing={'1px'}>SAVE FOR LATER</Button>
                                                             </Box>
                                                         </Box>
@@ -281,7 +283,7 @@ export const Cart = () => {
                                                                     <Text fontSize={'12px'} color='#151B3999'>QTY: {el.quantity ? el.quantity : 1}</Text>
                                                                     <Text fontSize={'12px'} color='#151B3999'>Mfr: {el.manufacturer}</Text>
                                                                     <Flex mt='20px'>
-                                                                        <Button bg='#e7e8eb' mr='10px' borderRadius={'3px'} fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart(SaveForLater_API, el.id)}>REMOVE</Button>
+                                                                        <Button bg='#e7e8eb' mr='10px' borderRadius={'3px'} fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart(SaveForLater_API, el._id)}>REMOVE</Button>
                                                                         <Button bg='#24aeb1' color='#fff' borderRadius={'3px'} fontSize={'12px'} size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => AddToCartFromSave(el)}>ADD TO CART</Button>
                                                                     </Flex>
                                                                 </Box>

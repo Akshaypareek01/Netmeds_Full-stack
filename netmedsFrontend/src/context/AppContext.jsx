@@ -5,6 +5,8 @@ import { EMPTYCART, EmptyCart, removeCartRedux } from "../Redux/action";
 import { Cart_API } from "../api";
 export const AppContext = createContext();
 
+let cartid=localStorage.getItem("userid")
+
 export const AppContextProvider = ({ children }) => {
     const [totalMRP, setTotalMRP] = useState(0);
     const [discount, setDiscount] = useState(0);
@@ -18,13 +20,13 @@ export const AppContextProvider = ({ children }) => {
 
     const getData = () => {
         setLoading(true);
-        fetch(Cart_API)
+        fetch(`${Cart_API}/${cartid}`)
             .then((res) => res.json())
             .then((res) => {
                 setLoading(false);
                 setTotalMRP(0);
                 setDiscount(0);
-                res.map(el => {
+                res.data.map(el => {
                     if (el.quantity && el.crossed_price) {
                         setTotalMRP((prev) => prev + (Number(el.crossed_price) * Number(el.quantity)))
                         setDiscount((prev) => prev + ((Number(el.crossed_price) - Number(el.actual_price)) * Number(el.quantity)))
@@ -40,7 +42,7 @@ export const AppContextProvider = ({ children }) => {
                         setTotalMRP((prev) => prev + (Number(el.actual_price)))
                     }
                 })
-                setCartData(res);
+                setCartData(res.data);
             }).catch((err) => {
                 setLoading(false);
                 setError(true);
@@ -50,7 +52,7 @@ export const AppContextProvider = ({ children }) => {
         dispatch(EmptyCart())
         cartData.map(el => {
             console.log('here')
-            fetch(`${Cart_API}/${el.id}`, {
+            fetch(`${Cart_API}/${el._id}`, {
                 method: 'DELETE'
             })
         })

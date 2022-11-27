@@ -19,11 +19,7 @@ app.post('/cart',addCart);
 app.patch('/cart/:id',updateCart)
 app.delete('/cart/:id',deleteCart)
 app.get('/product',Products);
-
-
-
 app.get('/cart', cartProduct)
-app.get('/product', Products)
 
 app.listen(8080, () => {
   try {

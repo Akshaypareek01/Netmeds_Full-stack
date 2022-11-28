@@ -121,7 +121,7 @@ const Signup = () => {
               <Input
                 paddingBlock={'3px'}
                 height="24px"
-                placeholder="Enter your mobile number"
+                placeholder="Enter your email address"
                 fontSize={'16px'}
                 variant={'flushed'}
                 type="email"
@@ -145,7 +145,7 @@ const Signup = () => {
               <Input
                 paddingBlock={'3px'}
                 height="24px"
-                placeholder="Enter your mobile number"
+                placeholder="Enter your password"
                 fontSize={'16px'}
                 variant={'flushed'}
                 type="password"

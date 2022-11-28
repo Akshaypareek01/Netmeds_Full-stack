@@ -11,6 +11,7 @@ app.use(cors());
 
 app.get('/cart', cartProduct)
 app.get('/product', Products)
+// app.get('/prodFilter,
 
 // app.get('/prodasc',ProductsAsc)
 

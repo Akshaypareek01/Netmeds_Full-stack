@@ -20,7 +20,7 @@ const manufOption=["Cipla Ltd(Otc)",
 
 export const Products=async(req,res) =>{
  try {
-    let {page=1,sortBy="_id",order="asc",pageSize=20,startPoint=0, endPoint=Infinity,category="all",sub_category,manufacturer}=req.query
+    let {page=1,sortBy="_id",order="asc",pageSize=20,startPoint=0, endPoint=Infinity,category="all",sub_category,manufacturer="all"}=req.query
     
     console.log(req.query);
     let filter = {
@@ -32,29 +32,10 @@ export const Products=async(req,res) =>{
             actual_price: {$lt: endPoint }
         }
     ],
-    category : {$in: (category=="all")?categOption:category.split(",")}
-    // manufacturer : {$in: (manufacturer=="all")?manufOption:manufacturer.split(",")}
-    
+    category : {$in: (category=="all")?categOption:category.split(",")},
+    manufacturer : {$in: (manufacturer=="all")?manufOption:manufacturer.split(",")}
 
     }
-
-    // let filterByCategory ={
-    // }
-    // category === "All" ? (category=[...categOption]):(genre=req.query.genre.split(","))
-
-                        //  {
-                            // productType: {$in: (productType=="all")?ProdctTypeArray:productType.split(",")}
-                        //  }
-        //                  {
-        //                    feature: {$in: (feature=="all")?Feature:feature.split(",")}
-        //                  },
-        //                   {
-        //                    formulation: {$in: (formulation=="all")?Formulation:formulation.split(",")}
-        //                  },
-        //                  {
-        //                    conern: {$in: (conern=="all")?Conern:conern.split(",")}
-        //                  }
-
 
     let data = "";
 //     if (category=="Personal Care"){
@@ -87,83 +68,3 @@ export const Products=async(req,res) =>{
 
 
 
-
-
-// async function search( req,res){
- 
-
-//     // Face Care
-//     let ProdctTypeArray = facecareData.ProdctTypeArray;
-//     let Feature =facecareData.Feature
-//     let Formulation=facecareData.Formulation
-//     let Conern = facecareData.Conern;
- 
- 
-//    let {
- 
-//      search = '',
-//      sortOrder = '',
-//      productType="all",
-//      feature="all",
-//      formulation="all",
-//      conern="all",
-//      cat=""
-//    } = req.query
- 
-   
- 
-   
-//    try{
- 
-//          var s = await data.find(
-//            {
-//             //  $and: [
-//             //      // condition 1
- 
-//             //      { 
-//             //        cat:cat
-//             //    },
- 
-//             //      { 
-//             //          name: { 
-//             //              $regex:search ,$options:"i"
-//             //          },
-//             //      },
-//                  // condition 2
-//               
- 
-                 
-                 
-//              ]
-//          }
-//          )
-         
-//          var main =  (sortOrder==="")?s:s.sort((a,b)=>{
-//              return (sortOrder==="low")?(a.price-b.price):(b.price-a.price);
-//          })
- 
-//          console.log(s+"nklknk");
- 
-       
-       
- 
-//        res.send(
-//          main
-//       );
- 
-   
- 
- 
-//    }catch(e){
-//      res.send(
-//        {}
-//    );
- 
-//     console.log(e)
- 
-//    }
- 
- 
- 
- 
-//  }

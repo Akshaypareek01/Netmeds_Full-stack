@@ -48,6 +48,7 @@ const LoginPage = () => {
     })
     let decodejson = await decode.json()
     localStorage.setItem('userdata', JSON.stringify(decodejson.user))
+    localStorage.setItem('cartid', JSON.stringify(decodejson.user._id))
     console.log(decodejson)
     setloading(false)
     if (data != undefined) {
@@ -127,7 +128,7 @@ const LoginPage = () => {
               <Input
                 paddingBlock={'3px'}
                 height="24px"
-                placeholder="Enter your mobile number"
+                placeholder="Enter your Password"
                 fontSize={'16px'}
                 value={password}
                 variant={'flushed'}

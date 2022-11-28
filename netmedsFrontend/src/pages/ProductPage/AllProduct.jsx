@@ -17,11 +17,11 @@ import { setCartProduct } from '../../Redux/action'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Cart_API } from '../../api'
 
-let cartid = JSON.parse(localStorage.getItem('userdata'))
-cartid = cartid._id
-console.log(cartid)
-
 const AllProduct = () => {
+  let cartid = JSON.parse(localStorage.getItem('cartid'))
+  let obj = {
+    userid: cartid,
+  }
   const {
     page,
     total,
@@ -36,11 +36,17 @@ const AllProduct = () => {
   const dispatch = useDispatch()
   let [search, setSearchParam] = useSearchParams()
   const handleAdd = (item) => {
-    item = { ...item, userid: 'sakti' }
+    console.log(cartid)
+    item = { ...item, ...obj }
+    console.log(item)
     console.log(item, 'item')
-    axios.get(`${Cart_API}/${cartid}`).then((res) => setCart(res.data))
-    const check = cart.filter((allItem) => allItem.id === item.id)
-    if (check.length === 0) {
+    axios
+      .get(`${Cart_API}/${cartid}`)
+      .then((res) => res.json())
+      .then((res) => setCart(res.data))
+    console.log(cart)
+    const check = cart.filter((allItem) => allItem.id == item.id)
+    if (check.length == 0) {
       axios
         .post(Cart_API, item)
         .then(() => {
@@ -239,7 +245,7 @@ const AllProduct = () => {
             )
           })}
         </Grid>
-        {total >= 20 && (
+        {
           <Box
             textAlign={'center'}
             mt="30px"
@@ -247,7 +253,7 @@ const AllProduct = () => {
             gap="5px"
             justifyContent={'center'}
           >
-            {page !== 1 && (
+            {
               <Button
                 size={'sm'}
                 border="1px solid #d4d5d9"
@@ -261,7 +267,7 @@ const AllProduct = () => {
               >
                 PREV
               </Button>
-            )}
+            }
             {
               <Button
                 onClick={(e) => handlePage(+e.target.innerHTML)}
@@ -291,7 +297,7 @@ const AllProduct = () => {
               </Button>
             )}
           </Box>
-        )}
+        }
       </Box>
     </>
   )

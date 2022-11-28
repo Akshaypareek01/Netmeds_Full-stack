@@ -1,4 +1,8 @@
 import React from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useNavigate } from 'react-router-dom'
+
 import {
   Box,
   Button,
@@ -19,8 +23,14 @@ const LoginPage = () => {
     const { name, value } = e.target
     setuserdetails({ ...userdetails, [name]: value })
   }
-
+  const [loading, setloading] = useState(false)
+  const notify = () =>
+    toast('Login Succesfull', {
+      autoClose: 1000,
+    })
+  const navigate = useNavigate()
   const handlesubmit = async () => {
+    setloading(true)
     let res = await fetch(`https://netmeds.onrender.com/login`, {
       method: 'POST',
       body: JSON.stringify(userdetails),
@@ -39,7 +49,13 @@ const LoginPage = () => {
     let decodejson = await decode.json()
     localStorage.setItem('userdata', JSON.stringify(decodejson.user))
     console.log(decodejson)
+    setloading(false)
+    if (data != undefined) {
+      notify()
+      navigate('/')
+    }
   }
+
   const { email, password } = userdetails
 
   return (
@@ -49,6 +65,7 @@ const LoginPage = () => {
       flexDirection={'column'}
       alignItems="center"
     >
+      <ToastContainer />
       <Container
         bg={'white'}
         centerContent
@@ -129,6 +146,7 @@ const LoginPage = () => {
               height="41px"
               width={'100%'}
               _hover={{ background: 'rgb(50,174,177)' }}
+              isLoading={loading}
             >
               LOGIN
             </Button>

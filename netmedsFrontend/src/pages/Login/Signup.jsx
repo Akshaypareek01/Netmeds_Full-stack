@@ -1,4 +1,6 @@
 import React from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import {
   Box,
   Button,
@@ -13,13 +15,16 @@ import {
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { EmailIcon, ViewIcon, InfoIcon } from '@chakra-ui/icons'
+import { useNavigate } from 'react-router-dom'
 const Signup = () => {
   const [userdetails, setuserdetails] = useState({
     name: '',
     email: '',
     password: '',
   })
-
+  const navigate = useNavigate()
+  const [validate, checkvalidate] = useState(false)
+  const notify = () => toast.error('User Already Exist')
   const handlechange = (e) => {
     const { name, value } = e.target
     setuserdetails({ ...userdetails, [name]: value })
@@ -36,8 +41,15 @@ const Signup = () => {
       .then((res) => {
         res.json()
         console.log(res)
+        if (res.status == 201) {
+          navigate('/Login')
+        } else {
+          notify()
+        }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   const { name, email, password } = userdetails
@@ -48,6 +60,7 @@ const Signup = () => {
       flexDirection={'column'}
       alignItems="center"
     >
+      <ToastContainer />
       <Container
         bg={'white'}
         centerContent

@@ -100,8 +100,8 @@ const AllProduct = () => {
                                 </GridItem >
                             })}
                         </Grid>
-                        {total >= 20 && <Box textAlign={"center"} mt="30px" display="flex" gap='5px' justifyContent={"center"}>
-                            {page !== 1 && <Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => handlePage(page - 1)}>PREV</Button>}
+                        {<Box textAlign={"center"} mt="30px" display="flex" gap='5px' justifyContent={"center"}>
+                            {<Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => handlePage(page - 1)}>PREV</Button>}
                             {<Button onClick={(e) => handlePage(+e.target.innerHTML)} size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page}</Button>}
                             {page !== Math.ceil(total / 20) && <Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => handlePage(page + 1)}>NEXT</Button>}
                         </Box>}

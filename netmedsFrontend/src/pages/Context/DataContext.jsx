@@ -6,45 +6,27 @@ import { errorState } from '../../Redux/action'
 import { Product_API } from '../../api'
 export const Data = createContext()
 
-const updatedUrl = (api, sort, order, subcategory, sortCategory, manufacturer, sliderVal) => {
+const updatedUrl = (api,sort, order, subcategory, sortCategory, manufacturer, sliderVal) => {
 
     return sort && sliderVal && sortCategory && manufacturer ?
-        `${api}&_sort=${sort}&_order=${order}&category=${sortCategory}&manufacturer=${manufacturer}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-        sort && sliderVal && subcategory && manufacturer ?
-            `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}&manufacturer=${manufacturer}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-            sort && sortCategory && subcategory ?
-                `${api}&_sort=${sort}&_order=${order}&category=${sortCategory}&sub_category=${subcategory}` :
-                sortCategory && subcategory && manufacturer ?
-                    `${api}&category=${sortCategory}&sub_category=${subcategory}&manufacturer=${manufacturer}` :
-                    sort && sliderVal && sortCategory ?
-                        `${api}&_sort=${sort}&_order=${order}&category=${sortCategory}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                        sort && sliderVal && subcategory ?
-                            `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                            sort && sliderVal && manufacturer ?
-                                `${api}&_sort=${sort}&_order=${order}&manufacturer=${manufacturer}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                                sortCategory && subcategory ?
-                                    `${api}&category=${sortCategory}&sub_category=${subcategory}` :
-                                    sortCategory && manufacturer ?
-                                        `${api}&category=${sortCategory}&manufacturer=${manufacturer}` :
-                                        subcategory && manufacturer ?
-                                            `${api}&sub_category=${subcategory}&manufacturer=${manufacturer}` :
-                                            sort && subcategory ?
-                                                `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}` :
-                                                sort && sliderVal ?
-                                                    `${api}&_sort=${sort}&_order=${order}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                                                    sort ?
-                                                        `${api}&_sort=${sort}&_order=${order}` :
-                                                        subcategory && sliderVal ?
-                                                            `${api}&sub_category=${subcategory}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                                                            subcategory ?
-                                                                `${api}&sub_category=${subcategory}` :
-                                                                sortCategory ?
-                                                                    `${api}&category=${sortCategory}` :
-                                                                    manufacturer ?
-                                                                        `${api}&manufacturer=${manufacturer}` :
-                                                                        sliderVal ?
-                                                                            `${api}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                                                                            api
+        `${Product_API}?sortBy=${sort}&order=${order}&category=${sortCategory}&manufacturer=${manufacturer}&startPoint=${sliderVal[0]}&endPoint=${sliderVal[1]}` :
+        sort && sliderVal && sortCategory ?
+            `${Product_API}?sortBy=${sort}&order=${order}&category=${sortCategory}&startPoint=${sliderVal[0]}&endPoint=${sliderVal[1]}` :
+            sort && sliderVal && manufacturer ?
+                `${Product_API}?sortBy=${sort}&order=${order}&manufacturer=${manufacturer}&startPoint=${sliderVal[0]}&endPoint=${sliderVal[1]}` :
+                sortCategory && manufacturer ?
+                    `${Product_API}?category=${sortCategory}&manufacturer=${manufacturer}` :
+                    sort && sliderVal ?
+                        `${Product_API}?sortBy=${sort}&order=${order}&startPoint=${sliderVal[0]}&endPoint=${sliderVal[1]}` :
+                        sort ?
+                            `${Product_API}?sortBy=${sort}&order=${order}` :
+                            sortCategory ?
+                                `${Product_API}?category=${sortCategory}` :
+                                manufacturer ?
+                                    `${Product_API}?manufacturer=${manufacturer}` :
+                                    sliderVal ?
+                                        `${Product_API}?startPoint=${sliderVal[0]}&endPoint=${sliderVal[1]}` :
+                                        Product_API
 }
 
 
@@ -193,7 +175,7 @@ const DataContext = ({ children }) => {
 
     const getProduct = () => {
         setLoading(true)
-        const api = updatedUrl(`${Product_API}?_page=${page}&_limit=20`, sort, order, subCategory, sortCategory, manufacturer, sliderVal)
+        const api = updatedUrl(`${Product_API}?page=${page}&limit=20`, sort, order,subCategory, sortCategory, manufacturer, sliderVal)
         console.log(api)
         axios.get(api)
             .then(res => {
@@ -215,7 +197,7 @@ const DataContext = ({ children }) => {
 
     useEffect(() => {
         getProduct()
-    }, [page, sort, order, subCategory, sortCategory, manufacturer, sliderVal])
+    }, [page, sort, order,subCategory, sortCategory, manufacturer, sliderVal])
 
     const handleReset = (p, sub, categ, manu, slid) => {
         handlePage(p)

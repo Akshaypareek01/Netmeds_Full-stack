@@ -22,9 +22,9 @@ const UserButton = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn)
   const userDetails =
     useSelector((state) => state.userDetails) ||
-    JSON.parse(localStorage.getItem('userdata'))
+    JSON.parse(localStorage.getItem('userDetails'))
   const { deleteAll } = useContext(AppContext)
-  const name = userDetails.email
+  const name = userDetails.name
   const handleClickOnUserButton = () => {
     if (isLoggedIn) {
       console.log('here')

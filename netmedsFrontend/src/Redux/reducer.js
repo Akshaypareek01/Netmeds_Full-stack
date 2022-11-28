@@ -15,7 +15,7 @@ const initState = {
   error: false,
   cart: [],
   mobileView: false,
-  isLoggedIn: JSON.parse(localStorage.getItem("userDetails")) || false,
+  isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
   userDetails: JSON.parse(localStorage.getItem("userDetails")) || [],
 };
 function reducer(state = initState, { type, payload }) {

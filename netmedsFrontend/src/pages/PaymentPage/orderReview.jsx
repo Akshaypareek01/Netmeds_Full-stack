@@ -125,9 +125,7 @@ const DELIVERYADDRESS={
 
 }
 
-const Username={
-  ...userDetails
-}
+const Username=userDetails.name
 
 
 const PaymentDetails={
@@ -207,7 +205,7 @@ const PaymentDetails={
               </Flex>
 
               <Box >
-                <Text color='#151b39' mb='10px' fontSize='16px' fontWeight='bold'>{Username.firstName +" "+Username.lastName}</Text>
+                <Text color='#151b39' mb='10px' fontSize='16px' fontWeight='bold'>{Username}</Text>
                     <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
                     {DELIVERYADDRESS.Address+" "+DELIVERYADDRESS.Landmark}
                     

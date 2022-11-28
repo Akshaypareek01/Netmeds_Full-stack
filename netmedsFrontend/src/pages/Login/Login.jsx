@@ -47,8 +47,9 @@ const LoginPage = () => {
       },
     })
     let decodejson = await decode.json()
-    localStorage.setItem('userdata', JSON.stringify(decodejson.user))
+    localStorage.setItem('userDetails', JSON.stringify(decodejson.user))
     localStorage.setItem('cartid', JSON.stringify(decodejson.user._id))
+    localStorage.setItem('isLoggedIn', true);
     console.log(decodejson)
     setloading(false)
     if (data != undefined) {

@@ -52,7 +52,7 @@ export const Cart = () => {
     }, [])
 
     const handleQuantity = (e, id) => {
-        console.log(id)
+        console.log(id,"objid")
         setLoading(true);
         const body = {
             quantity: e.target.value

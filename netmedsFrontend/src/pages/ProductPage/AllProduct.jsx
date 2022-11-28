@@ -9,20 +9,28 @@ import { setCartProduct } from '../../Redux/action';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Cart_API } from '../../api';
 
-let cartid=localStorage.getItem("userid")
+
+
 
 const AllProduct = () => {
+    let cartid=JSON.parse(localStorage.getItem("cartid"))
+    let obj={
+        userid:cartid
+    }
     const { page, total, loading, sortCategory, prod, handlePage, handlecurrProduct } = useContext(Data);
     console.log(sortCategory, 'sortedone')
     const [cart, setCart] = useState([]);
     const dispatch = useDispatch();
     let [search, setSearchParam] = useSearchParams();
     const handleAdd = (item) => {
-        item={...item,userid:"sakti"}
+         console.log(cartid)
+        item={...item,...obj}
+        console.log(item);
         console.log(item,"item");
-        axios.get(`${Cart_API}/${cartid}`).then((res) => setCart(res.data))
-        const check = cart.filter(allItem => allItem.id === item.id)
-        if (check.length === 0) {
+        axios.get(`${Cart_API}/${cartid}`).then((res) => res.json()).then((res)=>setCart(res.data))
+        console.log(cart);
+        const check = cart.filter(allItem => allItem.id == item.id)
+        if (check.length == 0) {
             axios.post(Cart_API, item)
                 .then(() => {
                     dispatch(setCartProduct(item))

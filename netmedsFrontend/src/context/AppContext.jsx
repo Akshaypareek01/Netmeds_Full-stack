@@ -5,9 +5,11 @@ import { EMPTYCART, EmptyCart, removeCartRedux } from "../Redux/action";
 import { Cart_API } from "../api";
 export const AppContext = createContext();
 
-let cartid=localStorage.getItem("userid")
+
 
 export const AppContextProvider = ({ children }) => {
+    let cartid=JSON.parse(localStorage.getItem("cartid"))
+ 
     const [totalMRP, setTotalMRP] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [promoCodeDiscount, setPromoCodeDiscount] = useState(0);

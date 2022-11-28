@@ -38,7 +38,7 @@ const LoginPage = () => {
     })
     let decodejson = await decode.json()
     localStorage.setItem('userdata', JSON.stringify(decodejson.user))
-    console.log(decodejson)
+    localStorage.setItem('cartid', JSON.stringify(decodejson.user._id));
   }
   const { email, password } = userdetails
 

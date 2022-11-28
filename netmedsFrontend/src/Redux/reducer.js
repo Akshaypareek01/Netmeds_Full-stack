@@ -40,12 +40,11 @@ function reducer(state = initState, { type, payload }) {
       return { ...state, loading: false, error: false, cart: [] };
     }
     case SETCARTBYREDUCER: {
-      // console.log('setcart called', [...state.cart, ...payload])
       return {
         ...state,
         loading: false,
         error: false,
-        cart: [...state.cart, ...payload],
+        cart: [...state.cart,payload],
       };
     }
     case TOGGLEVIEW: {

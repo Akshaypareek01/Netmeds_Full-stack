@@ -67,7 +67,14 @@ All the Functionalities are getting executed using Backend
 - **[Sakti Prasad](https://github.com/sakti8093)**
 
 
+
+## Conclusions
+
+learning technology is a different thing and showing what you have learned is a different thing. This project has given us the confidence to showcase whatever we have learned so far. This project also help us to learn those concepts, which can be gained only by practically doing, that can’t be taught during class. Lastly, I would like to thank all the team members of the group who coordinate remotely and let the project go smoothly.
+
+## Edited by - **[Vikas Dwivedi](https://github.com/itsvikasdwivedi)**
+
+
 #### Thank You For Visiting
 
 
-##Edited by - **[Vikas Dwivedi](https://github.com/itsvikasdwivedi)**

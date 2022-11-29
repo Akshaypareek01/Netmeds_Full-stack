@@ -20,9 +20,8 @@ To see the preview of the Project,first run the localhost in your system & then 
 - For References : [Chakra UI](https://chakra-ui.com/) | [MDN Docs](https://developer.mozilla.org/en-US/) | [W3School](https://www.w3schools.com/)
 
 ## Tech Stack Used
-
-- React.js
 - Javascript
+- React.js
 - Mongo Db
 - Chakra UI
 - React

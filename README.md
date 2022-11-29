@@ -22,10 +22,9 @@ To see the preview of the Project,first run the localhost in your system & then 
 ## Tech Stack Used
 - Javascript
 - React.js
-- Mongo Db
 - Chakra UI
-- React
 - Redux
+- Mongo Db
 - Express
 
 

@@ -101,7 +101,7 @@ All the Functionalities are getting executed using Backend
 - Built the cart page.
 
 
-### _Following are the Screenshots for the Reference_
+<!-- ### _Following are the Screenshots for the Reference_
 
 
 - **Landing Page**
@@ -114,7 +114,7 @@ All the Functionalities are getting executed using Backend
 <img width="947" alt="Screenshot_20221128_191606" src="https://user-images.githubusercontent.com/108896457/204296961-a2c0b245-74b8-44eb-9164-884e6ef99eb1.png">
 
 - **Sign-In Page**
-<img width="947" alt="Screenshot_20221128_191952" src="https://user-images.githubusercontent.com/108896457/204296965-bae1cf4d-1948-4487-b05e-628b8f80477e.png">
+<img width="947" alt="Screenshot_20221128_191952" src="https://user-images.githubusercontent.com/108896457/204296965-bae1cf4d-1948-4487-b05e-628b8f80477e.png"> -->
 
 
 ## Collabrators

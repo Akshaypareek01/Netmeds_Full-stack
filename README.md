@@ -4,7 +4,7 @@
 
 # Netmeds_Full-Stack App
 
-Netmeds.com, India Ki Pharmacy, is one of India’s most trusted pharmacies, with over 100 years’ experience in dispensing quality medicines.Netmeds.com,help you to look after your own health effortlessly as well as take care of loved ones wherever they may reside in India. You can buy and send medicines from any corner of the country - with just a few clicks of the mouse.
+Netmeds.com, India Ki Pharmacy, is one of India’s most trusted pharmacies, with over 10 years’ experience in dispensing quality medicines.Netmeds.com,help you to look after your own health effortlessly as well as take care of loved ones wherever they may reside in India. You can buy and send medicines from any corner of the country - with just a few clicks of the mouse.
 
 Netmeds Clone is an collabrative project in Masai, which we have built it in 4 days in our construct week.Our objective was to complete all the main functionality of this Pharmacitical E-commerce website starting with Sign-up to till the buying a products from the website.We used React.js, React-Redux, JavaScripts,HTML,CSS & Chakra UI for building the pages.
 And we created our own api for all the content as well. 
